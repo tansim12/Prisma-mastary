@@ -31,7 +31,7 @@ model User{
   id Int @id @default(autoincrement())
   userName String @unique
   email String @unique
-  role UserRole
+  role UserRole @default(user)
   profile Profile?  // one to one relation 
   post Post[] // one to many relation
   @@map("users")
@@ -60,5 +60,5 @@ model PostCategory {
   categoryId Int
   category Category @relation(fields: [categoryId], references: [id])
 
-  @@id([postId,categoryId])
+  @@id([postId,categoryId])  // create composit key
 }
