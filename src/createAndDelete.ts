@@ -1,52 +1,55 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, UserRole } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const main = async () => {
-  //   const result = await prisma.post.create({
-  //     data: {
-  //       title: "title",
-  //       contant: "content",
-  //       authorName:"tashdid"
-  //     },
-  //   });
-  //   console.log(result);\
+  // const createUser = await prisma.user.create({
+  //     data:{
+  //      email:"u5@gmail.com",
+  //      userName:"u5",
+  //      role:UserRole.user
 
-  //   create many
+  //     }
+  // })
 
-    // const createMany = await prisma.post.createMany({
-    //   data: [
-    //     {
-    //       title: "title",
-    //       contant: "content",
-    //       authorName: "tashdid",
-    //     },
-    //     {
-    //       title: "title",
-    //       contant: "content",
-    //       authorName: "tashdid",
-    //     },
-    //     {
-    //       title: "title",
-    //       contant: "content",
-    //       authorName: "tashdid",
-    //     },
-    //     {
-    //       title: "title",
-    //       contant: "content",
-    //       authorName: "tashdid",
-    //     },
-    //   ],
-    // });
+  // const createProfile = await prisma.profile.create({
+  //     data:{
+  //         bio:"this is bio",
+  //         userId:1
+  //     }
+  // })
 
-  //   console.log(createMany);
+  // const createCategory = await prisma.category.create({
+  //     data:{
+  //         name:"ai"
+  //     }
+  // })
 
-//   delete many 
-//   const deleteAll = await prisma.post.deleteMany({
-//     where: {
-//       authorName: "tashdid",
+//   const cratePost = await prisma.post.create({
+//     data:{
+//         title:"title1",
+//         content:"content1",
+//         authorId:1,
+//         postCategory: {
+//             // create:{
+//             //     categoryId:1
+//             // }
+
+//             create:[
+//                 {
+//                     categoryId:1
+//                 },
+//                 {
+//                     categoryId:3
+//                 }
+//             ]
+//         }
 //     },
-//   });
+//     include:{
+//         postCategory:true
+//     }
+//   })
+//   console.log(cratePost);
 };
 
-main();
+// main();
