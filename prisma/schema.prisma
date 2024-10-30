@@ -12,7 +12,7 @@ datasource db {
 model Post {
   id Int @id @default(autoincrement())
   title String
-  contant String
+  content String
   publish Boolean @default(false)
   authorId Int
   user User @relation(fields: [authorId], references: [id])
@@ -48,8 +48,7 @@ model Profile{
 
 model Category {
 id Int @id @default(autoincrement())
-name String
-
+name String @unique
 postCategory PostCategory[]
 @@map("categories")
 }
