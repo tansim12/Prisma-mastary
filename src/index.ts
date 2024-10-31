@@ -1,45 +1,59 @@
 import { PrismaClient, UserRole } from "@prisma/client";
+import { emit } from "process";
 import { inflate } from "zlib";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log:[
+   {
+    emit:"event",
+    level:"query"
+   }
+  ]
+});
+prisma.$on("query",(e)=>{
+  console.log(e);
+  
+})
 
 const main = async () => {
-//   const filteringByAnd = await prisma.post.findMany({
-//     // where: {
-//     //   title: {
-//     //     contains: "title",
-//     //   },
-//     //   publish: true,
-//     // },
-//     where: {
-//       AND: [
-//         {
-//           title: {
-//             contains: "sub",
-//           },
-//         },
-//         {
-//           publish: true,
-//         },
-//       ],
-//     },
-//   });
-  const filteringByOr = await prisma.post.findMany({
-    
+  const filteringByAnd = await prisma.post.findMany({
     where: {
-      OR: [
+      AND: [
         {
           title: {
             contains: "sub",
           },
         },
         {
-          publish: false,
+          publish: true,
         },
       ],
     },
+    include: {
+      postCategory: {
+        include:{
+          category:true
+        }
+      },
+    },
   });
-  console.log(filteringByOr);
+
+  // const filteringByOr = await prisma.post.findMany({
+
+  //   where: {
+  //     OR: [
+  //       {
+  //         title: {
+  //           contains: "sub",
+  //         },
+  //       },
+  //       {
+  //         publish: false,
+  //       },
+  //     ],
+  //   },
+  // });
+  // console.dir(filteringByAnd, { depth: inflate });
 };
 
 main();
